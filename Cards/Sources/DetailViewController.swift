@@ -36,7 +36,7 @@ internal class DetailViewController: UIViewController {
         blurView.frame = self.view.bounds
         
         scrollView.layer.backgroundColor = detailView?.backgroundColor?.cgColor ?? UIColor.white.cgColor
-        scrollView.layer.cornerRadius = 20
+        scrollView.layer.cornerRadius = 0 //20
         
         scrollView.delegate = self
         scrollView.alwaysBounceVertical = true
@@ -88,9 +88,9 @@ internal class DetailViewController: UIViewController {
             return
         }
         
-        scrollView.frame.size = CGSize(width: LayoutHelper.XScreen(85), height: LayoutHelper.YScreen(100) - 20)
+        scrollView.frame.size = CGSize(width: LayoutHelper.XScreen(100), height: LayoutHelper.YScreen(100))
         scrollView.center = blurView.center
-        scrollView.frame.origin.y = 40
+        scrollView.frame.origin.y = 0
         scrollView.frame = scrollView.frame.applying(transform)
         
         card.backgroundIV.frame.origin = scrollView.bounds.origin

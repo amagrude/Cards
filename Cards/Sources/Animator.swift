@@ -12,7 +12,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     
     fileprivate var presenting: Bool
     fileprivate var velocity = 0.6
-    var bounceIntensity: CGFloat = 0.07
+    var bounceIntensity: CGFloat = 0.03
     var card: Card
     
     init(presenting: Bool, from card: Card) {
@@ -21,6 +21,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         super.init()
     }
     
+    // MARK: - UIViewControllerAnimatedTransitioning Protocol
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         // Animation Context Setup
@@ -111,6 +112,11 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         
     }
     
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return velocity
+    }
+
+    // MARK: - Helper Functions
     private func bounceTransform(_ from: CGRect, to: CGRect ) -> CGAffineTransform {
         
         let old = from.center
@@ -124,12 +130,6 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         
         return CGAffineTransform(translationX: xMove, y: yMove)
     }
-
-    
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return velocity
-    }
-    
 }
 
 
