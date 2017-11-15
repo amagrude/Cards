@@ -37,7 +37,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             // Detail View Controller Dismiss Animations
             card.isPresenting = false
             
-            let superVC = to
+            let _ = to
             let detailVC = from as! DetailViewController
             let cardBackgroundFrame = detailVC.scrollView.convert(card.backgroundIV.frame, to: nil)
             let bounce = self.bounceTransform(cardBackgroundFrame, to: card.originalFrame)

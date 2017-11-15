@@ -36,7 +36,7 @@ internal class DetailViewController: UIViewController {
         blurView.frame = self.view.bounds
         
         scrollView.layer.backgroundColor = detailView?.backgroundColor?.cgColor ?? UIColor.white.cgColor
-        scrollView.layer.cornerRadius = 0 //20
+        scrollView.layer.cornerRadius = 0
         
         scrollView.delegate = self
         scrollView.alwaysBounceVertical = true
