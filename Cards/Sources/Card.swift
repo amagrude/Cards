@@ -15,12 +15,19 @@ import UIKit
     
     @objc optional func cardDidTapInside(card: Card)
     @objc optional func cardWillShowDetailView(card: Card)
+    @objc optional func cardWillShow(detailView: UIViewController?, for: Card)
     @objc optional func cardDidShowDetailView(card: Card)
+    @objc optional func cardDidShow(detailView: UIViewController?, for: Card)
     @objc optional func cardWillCloseDetailView(card: Card)
+    @objc optional func cardWillClose(detailView: UIViewController?, for: Card)
     @objc optional func cardDidCloseDetailView(card: Card)
+    @objc optional func cardDidClose(detailView: UIViewController?, for: Card)
     @objc optional func cardIsShowingDetail(card: Card)
+    @objc optional func cardIsShowing(detailView: UIViewController?, for: Card)
     @objc optional func cardIsHidingDetail(card: Card)
+    @objc optional func cardIsHiding(detailView: UIViewController?, for: Card)
     @objc optional func cardDetailIsScrolling(card: Card)
+    @objc optional func cardIsScrolling(detailView: UIViewController?, for: Card)
     
     @objc optional func cardHighlightDidTapButton(card: CardHighlight, button: UIButton)
     @objc optional func cardPlayerDidPlay(card: CardPlayer)
@@ -99,7 +106,7 @@ import UIKit
         if let content = contentViewController {
             self.superVC = superVC
             detailVC.addChildViewController(content)
-            detailVC.detailView = content.view
+            detailVC.detailViewController = content
             detailVC.card = self
             detailVC.delegate = self.delegate
         }

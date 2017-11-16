@@ -10,7 +10,7 @@ import UIKit
 internal class DetailViewController: UIViewController {
     
     var blurView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight ))
-    var detailView: UIView?
+    var detailViewController: UIViewController?
     var scrollView = UIScrollView()
     var originalFrame = CGRect.zero
     var snap = UIView()
@@ -26,7 +26,7 @@ internal class DetailViewController: UIViewController {
         self.snap = UIScreen.main.snapshotView(afterScreenUpdates: true)
         self.view.addSubview(blurView)
         self.view.addSubview(scrollView)
-        if let detail = detailView {
+        if let detail = detailViewController?.view {
             
             scrollView.addSubview(detail)
             detail.autoresizingMask = .flexibleWidth
@@ -35,7 +35,7 @@ internal class DetailViewController: UIViewController {
         
         blurView.frame = self.view.bounds
         
-        scrollView.layer.backgroundColor = detailView?.backgroundColor?.cgColor ?? UIColor.white.cgColor
+        scrollView.layer.backgroundColor = detailViewController?.view.backgroundColor?.cgColor ?? UIColor.white.cgColor
         scrollView.layer.cornerRadius = 0
         
         scrollView.delegate = self
@@ -47,13 +47,14 @@ internal class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         scrollView.addSubview(card.backgroundIV)
         self.delegate?.cardWillShowDetailView?(card: self.card)
+        self.delegate?.cardWillShow!(detailView: self.detailViewController, for: self.card)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         self.view.insertSubview(snap, belowSubview: blurView)
         originalFrame = scrollView.frame
         
-        if let detail = detailView {
+        if let detail = detailViewController?.view {
             
             detail.alpha = 1
             detail.frame = CGRect(x: 0,
