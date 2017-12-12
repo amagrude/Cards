@@ -69,8 +69,6 @@ import UIKit
         blurV.contentView.addSubview(titleLbl)
         blurV.contentView.addSubview(vibrancyV)
         vibrancyV.contentView.addSubview(subtitleLbl)
-        blurV.contentView.addSubview(buttonView)
-        buttonView.isHidden = true
     }
     
     override open func draw(_ rect: CGRect) {
@@ -96,9 +94,6 @@ import UIKit
         
         let blur = UIBlurEffect(style: blurEffect)
         blurV.effect = blur
-        
-        let buttonImage = UIImage(named: "Lover")
-        buttonView.image = buttonImage
         
         layout(animating: false)
     }
@@ -126,11 +121,6 @@ import UIKit
                                 width: gimme.X(80),
                                 height: gimme.Y(20))
         titleLbl.sizeToFit()
-        
-        buttonView.frame = CGRect(x: backgroundIV.bounds.width - insets - CGFloat(40),
-                                  y: insets,
-                                  width: CGFloat(40),
-                                  height: CGFloat(40))
     }
 
 }

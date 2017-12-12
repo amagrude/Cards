@@ -16,7 +16,7 @@ internal class DetailViewController: UIViewController {
     var snap = UIView()
     var card: Card!
     var delegate: CardDelegate?
-    
+    var buttonView = UIImageView()
     
     //MARK: - View Lifecycle
     
@@ -42,6 +42,10 @@ internal class DetailViewController: UIViewController {
         scrollView.alwaysBounceVertical = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        
+        let buttonImage = UIImage(named: "close-button")
+        buttonView.image = buttonImage
+        self.view.addSubview(buttonView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,12 +85,23 @@ internal class DetailViewController: UIViewController {
     
     func layout(_ rect: CGRect, isPresenting: Bool, isAnimating: Bool = true, transform: CGAffineTransform = CGAffineTransform.identity){
         
+        let buttonWidth = CGFloat(30)
+        let buttonHeight = CGFloat(30)
+
         guard isPresenting else {
             
             scrollView.frame = rect.applying(transform)
+            buttonView.frame = CGRect(x: rect.minX + rect.width - buttonWidth/2 - CGFloat(8),
+                                      y: rect.minY + buttonHeight/2 + CGFloat(4),
+                                      width: buttonWidth/2,
+                                      height: buttonHeight/2).applying(transform)
+            buttonView.alpha = CGFloat(0.0)
             card.backgroundIV.frame = scrollView.bounds
             card.layout(animating: isAnimating)
             return
+        }
+        if (!isPresenting && !isAnimating) {
+            buttonView.isHidden = true
         }
         
         scrollView.frame.size = CGSize(width: LayoutHelper.XScreen(100), height: LayoutHelper.YScreen(100))
@@ -99,6 +114,12 @@ internal class DetailViewController: UIViewController {
                                             height: card.backgroundIV.bounds.height)
         card.layout(animating: isAnimating)
     
+        buttonView.frame = CGRect(x: self.view.frame.width - CGFloat(60),
+                                  y: CGFloat(40),
+                                  width: buttonWidth,
+                                  height: buttonHeight)
+        buttonView.alpha = CGFloat(1.0)
+        buttonView.isHidden = false
     }
 }
 

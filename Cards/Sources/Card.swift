@@ -133,7 +133,6 @@ import UIKit
     var backgroundIV = UIImageView()
     var insets = CGFloat()
     var isPresenting = false
-    var buttonView = UIImageView()
     
     //MARK: - View Life Cycle
     
@@ -185,8 +184,6 @@ import UIKit
         backgroundIV.frame.origin = bounds.origin
         backgroundIV.frame.size = CGSize(width: bounds.width, height: bounds.height)
         contentInset = 6
-        
-        
     }
     
     
@@ -245,12 +242,10 @@ import UIKit
 extension Card: UIViewControllerTransitioningDelegate {
     
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        buttonView.isHidden = false
         return Animator(presenting: true, from: self)
     }
     
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        buttonView.isHidden = true
         return Animator(presenting: false, from: self)
     }
     
