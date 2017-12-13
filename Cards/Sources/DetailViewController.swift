@@ -74,11 +74,13 @@ internal class DetailViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.delegate?.cardWillCloseDetailView?(card: self.card)
+        self.delegate?.cardWillClose?(detailView: self.detailViewController, for: self.card)
         snap.removeFromSuperview()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         self.delegate?.cardDidCloseDetailView?(card: self.card)
+        self.delegate?.cardDidClose?(detailView: self.detailViewController, for: self.card)
     }
     
     //MARK: - Layout & Animations for the content ( rect = Scrollview + card + detail )
