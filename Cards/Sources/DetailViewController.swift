@@ -114,7 +114,7 @@ internal class DetailViewController: UIViewController {
                                             height: card.backgroundIV.bounds.height)
         card.layout(animating: isAnimating)
     
-        buttonView.frame = CGRect(x: self.view.frame.width - CGFloat(60),
+        buttonView.frame = CGRect(x: self.view.frame.width - CGFloat(50),
                                   y: CGFloat(40),
                                   width: buttonWidth,
                                   height: buttonHeight)
