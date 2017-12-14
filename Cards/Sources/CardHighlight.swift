@@ -157,6 +157,7 @@ import UIKit
         actionBtn.setAttributedTitle(btnTitle, for: .normal)
         
         btnWidth = CGFloat((buttonText.count + 2) * 10)
+        
         layout()
         
     }

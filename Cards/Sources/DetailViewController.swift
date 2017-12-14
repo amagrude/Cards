@@ -17,6 +17,7 @@ internal class DetailViewController: UIViewController {
     var card: Card!
     var delegate: CardDelegate?
     var closeButton = UIButton(type: UIButtonType.custom) as UIButton
+    var isFullscreen: Bool = false
     
     //MARK: - View Lifecycle
     

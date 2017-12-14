@@ -95,7 +95,7 @@ import UIKit
         let blur = UIBlurEffect(style: blurEffect)
         blurV.effect = blur
         
-        layout(animating: false)
+        layout()
     }
     
     override func layout(animating: Bool = true) {
