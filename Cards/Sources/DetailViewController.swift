@@ -135,6 +135,7 @@ internal class DetailViewController: UIViewController {
     
     @objc func closeButtonAction(sender: Any!)
     {
+        scrollView.contentOffset.y = 0
         dismiss(animated: true, completion: nil)
     }
 }
