@@ -5,3 +5,6 @@ Pod/
 Images/\.DS_Store
 
 \.DS_Store
+Demo/Demo.xcodeproj/xcuserdata/andrew.xcuserdatad/xcschemes/xcschememanagement.plist
+Demo/Demo.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+Demo/Pods/Pods.xcodeproj/xcuserdata/andrew.xcuserdatad/xcschemes/xcschememanagement.plist
