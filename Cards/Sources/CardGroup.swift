@@ -20,9 +20,9 @@ import UIKit
         }
     }
     /**
-     Max font size the title label.
+     Font size the title label.
      */
-    @IBInspectable public var titleSize: CGFloat = 26
+    @IBInspectable public var titleSize: CGFloat = 24
     /**
      Text of the subtitle label.
      */
@@ -32,9 +32,17 @@ import UIKit
         }
     }
     /**
-     Max font size the subtitle label.
+     Font size the subtitle label.
      */
-    @IBInspectable public var subtitleSize: CGFloat = 26
+    @IBInspectable public var subtitleSize: CGFloat = 12
+    /**
+     Color for the card's labels.
+     */
+    @IBInspectable public var subTitleTextColor: UIColor = UIColor.gray
+    /**
+     Padding between subtitle and title.
+     */
+    @IBInspectable public var padding: CGFloat = 3.0
     /**
      Style for the blur effect.
      */
@@ -48,7 +56,6 @@ import UIKit
     var subtitleLbl = UILabel()
     var titleLbl = UILabel()
     var blurV = UIVisualEffectView()
-    var vibrancyV = UIVisualEffectView()
     
     // View Life Cycle
     override public init(frame: CGRect) {
@@ -64,11 +71,9 @@ import UIKit
     override func initialize() {
         super.initialize()
         
-        vibrancyV = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: blurEffect)))
         backgroundIV.addSubview(blurV)
+        blurV.contentView.addSubview(subtitleLbl)
         blurV.contentView.addSubview(titleLbl)
-        blurV.contentView.addSubview(vibrancyV)
-        vibrancyV.contentView.addSubview(subtitleLbl)
     }
     
     override open func draw(_ rect: CGRect) {
@@ -77,12 +82,12 @@ import UIKit
         super.draw(rect)
         
         subtitleLbl.text = subtitle.uppercased()
-        subtitleLbl.textColor = textColor
+        subtitleLbl.textColor = subTitleTextColor
         subtitleLbl.font = UIFont.systemFont(ofSize: subtitleSize, weight: .semibold)
         subtitleLbl.adjustsFontSizeToFitWidth = true
         subtitleLbl.minimumScaleFactor = 0.1
         subtitleLbl.lineBreakMode = .byTruncatingTail
-        subtitleLbl.numberOfLines = 0
+        subtitleLbl.numberOfLines = 1
         
         titleLbl.textColor = textColor
         titleLbl.text = title
@@ -90,7 +95,7 @@ import UIKit
         titleLbl.adjustsFontSizeToFitWidth = true
         titleLbl.minimumScaleFactor = 0.1
         titleLbl.lineBreakMode = .byTruncatingTail
-        titleLbl.numberOfLines = 2
+        titleLbl.numberOfLines = 1
         
         let blur = UIBlurEffect(style: blurEffect)
         blurV.effect = blur
@@ -101,26 +106,30 @@ import UIKit
     override func layout(animating: Bool = true) {
         super.layout(animating: animating)
         
-        let gimme = LayoutHelper(rect: backgroundIV.bounds)
+        let width = backgroundIV.bounds.width
         
-        blurV.frame = CGRect(x: 0,
-                             y: 0,
-                             width: backgroundIV.bounds.width,
-                             height: gimme.Y(42))
-        
-        vibrancyV.frame = blurV.frame
-        
+        let labelWidth = width - insets
+        let subTitleHeight = subtitleLbl.frame.height
         
         subtitleLbl.frame = CGRect(x: insets,
                                    y: insets,
-                                   width: gimme.X(80),
-                                   height: gimme.Y(6))
-        
+                                   width: labelWidth,
+                                   height: subTitleHeight)
+        subtitleLbl.sizeToFit()
+
+        let titleHeight = subtitleLbl.frame.height
         titleLbl.frame = CGRect(x: insets,
-                                y: gimme.Y(0, from: subtitleLbl),
-                                width: gimme.X(80),
-                                height: gimme.Y(20))
+                                y: subtitleLbl.frame.maxY + padding,
+                                width: labelWidth,
+                                height: titleHeight)
         titleLbl.sizeToFit()
+        
+        let blurHeight = titleLbl.frame.maxY + (padding * 3.0) + insets
+        
+        blurV.frame = CGRect(x: 0,
+                             y: 0,
+                             width: width,
+                             height: blurHeight)
     }
 
 }
