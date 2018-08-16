@@ -15,19 +15,12 @@ import UIKit
     
     @objc optional func cardDidTapInside(card: Card)
     @objc optional func cardWillShowDetailView(card: Card)
-    @objc optional func cardWillShow(detailView: UIViewController?, for: Card)
     @objc optional func cardDidShowDetailView(card: Card)
-    @objc optional func cardDidShow(detailView: UIViewController?, for: Card)
     @objc optional func cardWillCloseDetailView(card: Card)
-    @objc optional func cardWillClose(detailView: UIViewController?, for: Card)
     @objc optional func cardDidCloseDetailView(card: Card)
-    @objc optional func cardDidClose(detailView: UIViewController?, for: Card)
     @objc optional func cardIsShowingDetail(card: Card)
-    @objc optional func cardIsShowing(detailView: UIViewController?, for: Card)
     @objc optional func cardIsHidingDetail(card: Card)
-    @objc optional func cardIsHiding(detailView: UIViewController?, for: Card)
     @objc optional func cardDetailIsScrolling(card: Card)
-    @objc optional func cardIsScrolling(detailView: UIViewController?, for: Card)
     
     @objc optional func cardHighlightDidTapButton(card: CardHighlight, button: UIButton)
     @objc optional func cardPlayerDidPlay(card: CardPlayer)
@@ -106,7 +99,7 @@ import UIKit
         if let content = contentViewController {
             self.superVC = superVC
             detailVC.addChildViewController(content)
-            detailVC.detailViewController = content
+            detailVC.detailView = content.view
             detailVC.card = self
             detailVC.delegate = self.delegate
             detailVC.isFullscreen = fullscreen
@@ -129,10 +122,10 @@ import UIKit
     //Private Vars
     fileprivate var tap = UITapGestureRecognizer()
     fileprivate var detailVC = DetailViewController()
-    var superVC: UIViewController?
+    weak var superVC: UIViewController?
     var originalFrame = CGRect.zero
-    var backgroundIV = UIImageView()
-    var insets = CGFloat()
+    public var backgroundIV = UIImageView()
+    public var insets = CGFloat()
     var isPresenting = false
     
     //MARK: - View Life Cycle
@@ -147,7 +140,7 @@ import UIKit
         initialize()
     }
     
-    func initialize() {
+    open func initialize() {
         
         // Tap gesture init
         self.addGestureRecognizer(tap)
@@ -190,7 +183,7 @@ import UIKit
     
     //MARK: - Layout
     
-    func layout(animating: Bool = true){ }
+    open func layout(animating: Bool = true){ }
     
     
     //MARK: - Actions
@@ -260,11 +253,16 @@ extension Card: UIGestureRecognizerDelegate {
         cardTapped()
     }
     
+    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        resetAnimated()
+    }
+    
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         if let superview = self.superview {
             originalFrame = superview.convert(self.frame, to: nil)
         }
+        
         pushBackAnimated()
     }
 }
