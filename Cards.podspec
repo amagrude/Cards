@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'Cards'
-  s.version          = '1.3.1'
+  s.version          = '1.3.4'
   s.summary          = 'Awesome iOS 11 appstore cards in swift 4.'
   s.homepage         = 'https://github.com/PaoloCuscela/Cards'
   s.screenshots      = 'https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/Header.png', 'https://raw.githubusercontent.com/PaoloCuscela/Cards/master/Images/DetailView.gif'
@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.source_files = 'Cards/Sources/*'
   s.frameworks = 'UIKit'
-  s.dependency "Player"
+  s.dependency 'Player', '0.8.4'
 end
