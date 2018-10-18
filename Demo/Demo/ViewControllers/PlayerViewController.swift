@@ -16,7 +16,7 @@ class PlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        card.videoSource = URL(string: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+        card.videoSource = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
         card.shouldDisplayPlayer(from: self)    //Required.
         
         card.playerCover = UIImage(named: "mvBackground")!  // Shows while the player is loading

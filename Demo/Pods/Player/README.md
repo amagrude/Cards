@@ -4,17 +4,24 @@
 
 `Player` is a simple iOS video player library written in [Swift](https://developer.apple.com/swift/).
 
-[![Build Status](https://travis-ci.org/piemonte/Player.svg?branch=master)](https://travis-ci.org/piemonte/Player) [![Pod Version](https://img.shields.io/cocoapods/v/Player.svg?style=flat)](http://cocoadocs.org/docsets/Player/) [![Swift Version](https://img.shields.io/badge/language-swift%204.0-brightgreen.svg)](https://developer.apple.com/swift) [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/piemonte/Player/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/piemonte/Player.svg?branch=master)](https://travis-ci.org/piemonte/Player) [![Pod Version](https://img.shields.io/cocoapods/v/Player.svg?style=flat)](http://cocoadocs.org/docsets/Player/) [![Swift Version](https://img.shields.io/badge/language-swift%204.2-brightgreen.svg)](https://developer.apple.com/swift) [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://github.com/piemonte/Player/blob/master/LICENSE)
 
 - Looking for an obj-c video player? Check out [PBJVideoPlayer (obj-c)](https://github.com/piemonte/PBJVideoPlayer).
 - Looking for a Swift camera library? Check out [Next Level](https://github.com/NextLevel/NextLevel).
 
+Need a different version of Swift?
+* `4.2` - Target your Podfile to the latest release or master
+* `4.0` - Target your Podfile to the `swift4.0` branch
+* `3.0` – Target your Podfile to release `0.7.0`
+
 ### Features
+
 - [x] plays local media or streams remote media over HTTP
 - [x] customizable UI and user interaction
 - [x] no size restrictions
 - [x] orientation change support
 - [x] simple API
+- [x] video frame snapshot support
 
 # Quick Start
 
@@ -22,14 +29,12 @@
 
 ```ruby
 # CocoaPods
-swift_version = "4.0"
-pod "Player", "~> 0.8.0"
+swift_version = "4.2"
+pod "Player", "~> 0.12.0"
 
 # Carthage
-github "piemonte/Player" ~> 0.8.0
+github "piemonte/Player" ~> 0.12.0
 ```
-
-Need Swift 3? Use release `0.7.0`
 
 ## Usage
 
@@ -42,7 +47,7 @@ Allocate and add the `Player` controller to your view hierarchy.
  self.player.playerDelegate = self
  self.player.playbackDelegate = self
  self.player.view.frame = self.view.bounds
-    
+
  self.addChildViewController(self.player)
  self.view.addSubview(self.player.view)
  self.player.didMove(toParentViewController: self)
@@ -74,19 +79,19 @@ extension ViewController: PlayerPlaybackDelegate {
 
     public func playerPlaybackWillStartFromBeginning(_ player: Player) {
     }
-    
+
     public func playerPlaybackDidEnd(_ player: Player) {
     }
-    
+
     public func playerCurrentTimeDidChange(_ player: Player) {
         let fraction = Double(player.currentTime) / Double(player.maximumDuration)
         self._playbackViewController?.setProgress(progress: CGFloat(fraction), animated: true)
     }
-    
+
     public func playerPlaybackWillLoop(_ player: Player) {
         self. _playbackViewController?.reset()
     }
-    
+
 }
 ```
 
@@ -113,4 +118,3 @@ You can find [the docs here](http://piemonte.github.io/Player/). Documentation i
 ## License
 
 Player is available under the MIT license, see the [LICENSE](https://github.com/piemonte/player/blob/master/LICENSE) file for more information.
-

@@ -8,8 +8,9 @@ Pod::Spec.new do |s|
   s.author           = { 'Paolo Cuscela' => 'cuscio.2@gmail.com'}
   s.source           = { :git => 'https://github.com/PaoloCuscela/Cards.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.0'
   s.source_files = 'Cards/Sources/*'
   s.frameworks = 'UIKit'
-  s.dependency 'Player', '0.8.4'
+  s.swift_version = '4.2'
+  s.dependency 'Player'
 end
